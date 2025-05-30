@@ -19,8 +19,8 @@ app.get('/',async(req,res) => {
     try{
         const classBr = requerirJson('https://api.football-data.org/v4/competitions/BSA/standings')
         const rodadasBr = requerirJson('https://api.football-data.org/v4/competitions/BSA/matches')
-        criarArquivoJson(classBr,'classificacaoBr.json')
-        criarArquivoJson(rodadasBr,'rodadasBr.json')
+        await criarArquivoJson(classBr,'classificacaoBr.json')
+        await criarArquivoJson(rodadasBr,'rodadasBr.json')
         const tabela = await gerarTabela()
         const rodada = await gerarRodadas()
         const rodadas = renderRodada(rodada)
