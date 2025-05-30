@@ -1,31 +1,27 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs/promises')
 
-fs.readFile('resultado.json','utf8',(err,data)=>{
-    if (err){
-        console.error('Erro ao ler o arquivo: ',err)
-        return
-    }else{
-        const objeto = JSON.parse(data)
-        const classificacao = objeto.standings
-        let cardsHtml = ''
-        let bgcolor = ""
-        classificacao.forEach(element => {
-            element.table.forEach(time =>{
-                let equipe = {
-                    nome: time.team.shortName,
-                    pos: time.position,
-                    jogos: time.playedGames,
-                    vitorias: time.won,
-                    empates: time.draw,
-                    derrotas: time.lost,
-                    pontos: time.points,
-                    golsPro: time.goalsFor,
-                    golsSofridos: time.goalsAgainst,
-                    saldoDeGols: time.goalDifference,
-                    aproveitamento: ((time.points/114) * 100).toFixed(2),
-                    imagem: time.team.crest
-                }
+async function gerarTabela(){
+    const data = await fs.readFile('classificacaoBr.json','utf8')
+    const objeto = JSON.parse(data)
+    const classificacao = objeto.standings
+    let cardsHtml = ''
+    let bgcolor = ""
+    classificacao.forEach(element => {
+        element.table.forEach(time =>{
+            let equipe = {
+                nome: time.team.shortName,
+                pos: time.position,
+                jogos: time.playedGames,
+                vitorias: time.won,
+                empates: time.draw,
+                derrotas: time.lost,
+                pontos: time.points,
+                golsPro: time.goalsFor,
+                golsSofridos: time.goalsAgainst,
+                saldoDeGols: time.goalDifference,
+                aproveitamento: ((time.points/(time.playedGames*3)) * 100).toFixed(2),
+                imagem: time.team.crest
+            }
                 if(equipe.nome === 'Recife'){
                     equipe.nome = 'Sport Recife'
                 }
@@ -59,18 +55,9 @@ fs.readFile('resultado.json','utf8',(err,data)=>{
                     <td>${equipe.aproveitamento}</td>
                 </tr>
                 `
+                })
             })
-        })
-        const htmlPath = path.join(__dirname, 'front', 'index.html')
-        fs.readFile(htmlPath,'utf8',(err,index)=> {
-            if(err) return console.error('Erro ao ler o index.html: ', err)
-            
-            const htmlFinal = index.replace('<!--tabela-->', cardsHtml)
-        fs.writeFile(htmlPath,htmlFinal, (err) => {
-            if(err) return console.error('Erro ao salvar o arquivo HTML: ',err)
-            console.log('Arquivo index.html salvo com sucesso!')
-        })
-        })
-    }
-})
+    return cardsHtml
+}
 
+module.exports = gerarTabela

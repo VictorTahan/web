@@ -1,0 +1,189 @@
+body{
+    background-image: url("fundo.png");
+    background-size: cover;        
+    background-position: center;   
+    height: 100vh;                 
+    margin: 0; 
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1vh 99vh;
+    margin: 50px;
+    grid-template-areas:
+        "head head" 
+        "tabela rodadas";
+    gap: 30px;
+}
+
+
+button{
+    background-color: rgba(240, 248, 255, 0);
+    color: white; 
+    border-color: rgba(240, 248, 255, 0); 
+    font-size: 30px;
+}
+
+button:hover{
+    border-color: white;
+    border-style:double;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#tabela{
+    grid-area: tabela;
+}
+
+#rodadas{
+    grid-area: rodadas;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}   
+
+#rodadas, #tabela{
+    max-height: auto;
+    flex-wrap: nowrap;
+}
+
+
+#tabela, #rodadas{
+    padding:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+
+.rodada{
+    align-items: center;
+    margin-top: 2px;
+    width: 100%;
+    height: 57px;
+    background-color: rgba(0, 0, 0, 0.61);
+    font-size: 16px;
+    color: white;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-areas: 
+        "img_man data_local data_local data_local data_local data_local img_vis"
+        "img_man mandante placar_man versus placar_vis visitante img_vis"
+        "img_man status_partida status_partida status_partida status_partida status_partida img_vis";
+    border-radius: 10px;
+}
+
+#img_man{
+    grid-area: img_man;
+}
+
+#img_vis{
+    grid-area: img_vis;
+}
+
+#data_local{
+    grid-area: data_local;
+}
+
+#mandante{
+    grid-area: mandante;
+}
+
+#placar_man{
+    grid-area: placar_man;
+}
+
+#visitante{
+    grid-area: visitante;
+}
+
+#placar_vis{
+    grid-area: placar_vis;
+}
+
+#status_partida{
+    grid-area: status_partida;
+}
+
+#versus{
+    grid-area: versus;
+}
+
+#versus,#status_partida, #placar_vis, #placar_man, #mandante, #visitante, #data_local{
+    border-radius: 10px;
+}
+
+table{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: 100%;
+    font-size: calc(100vh / 35);
+    background-color: rgba(0, 0, 0, 0.61);
+}
+
+th,td{
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.picture{
+    width: 20px;
+    height: 20px;
+}
+
+#rodape_tabela{
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr 8fr;
+    font-size: 15px; 
+    color: white;
+}
+span{
+    margin-left: 30px;
+}
+
+@media (max-width: 768px) {
+  #container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "head"
+      "tabela"
+      "rodadas";
+    margin: 10px;
+    gap: 20px;
+  }
+
+  #rodadas, #tabela {
+    font-size: 14px;
+    overflow-x: auto; /* permite rolagem horizontal se precisar */
+  }
+
+
+  table {
+    font-size: 12px;
+  }
+
+  #rodape_tabela {
+    font-size: 12px;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+  }
+
+  .picture {
+    width: 15px;
+    height: 15px;
+  }
+
+  button {
+    font-size: 20px;
+  }
+}

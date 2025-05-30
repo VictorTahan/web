@@ -1,0 +1,42 @@
+<div id="container">
+    <div id="tabela">
+        <table>     
+            <tr>
+                <th colspan="3">Campeonato Brasileiro Série A 2025</th>
+                <th title="Pontos">P</th>
+                <th title="Jogos">J</th>
+                <th title="Vitórias">V</th>
+                <th title="Empates">E</th>
+                <th title="Derrotas">D</th>
+                <th title="Gols Marcados">GM</th>
+                <th title="Gols Sofridos">GS</th>
+                <th title="Saldo de Gols">SG</th>
+                <th title="Aproveitamento">%</th>
+            </tr>
+                
+            {{{tabelaHTML}}}
+            
+        </table>
+        <div id="rodape_tabela">
+            <span style="width: 15px; height: 15px;background-color:rgba(0, 3, 175, 0.61); display: inline-block;"></span>
+            fase de grupos libertadores 2026
+            <span style="width: 15px; height: 15px;background-color:rgba(0, 241, 40, 0.61); display: inline-block;"></span>
+            pré-libertadores 2026
+            <span style="width: 15px; height: 15px;background-color:rgba(179, 255, 1, 0.61); display: inline-block;"></span>
+            sul-americana 2026
+            <span style="width: 15px; height: 15px;background-color:rgba(233, 0, 0, 0.61); display: inline-block;"></span>
+            rebaixados série B 2026
+        </div>
+    </div>
+        <div id="head"></div>
+        <div id="head" style="color: white; font-family: Arial, Helvetica, sans-serif; font-size: 30px; text-align: center;">
+            <button id="voltar"><<</button>Rodada <span id="numero-rodada">{{numeroRodadaInicial}}</span><button id="avancar">>></button>
+        </div>
+        <div id="rodadas"><b></b>
+            {{{rodadasHTML}}}
+        </div>
+</div>
+<script>
+  let rodadaAtual = {{numeroRodadaInicial}};
+</script>
+<script src="/scripts/scripts.js"></script>
