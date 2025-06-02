@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path')
@@ -5,7 +6,6 @@ const gerarTabela = require('./ranking')
 const {gerarNumeroRodada,renderRodada} = require('./rodadas')
 const handlebars = require('express-handlebars')
 const axios = require('axios')
-require('dotenv').config()
 
 //configurações
     //Template Engine
@@ -17,7 +17,7 @@ require('dotenv').config()
 
 app.get('/',async(req,res) => {
     try{
-        const headers = { 'X-Auth-Token': process.env.FOOTBALL_API_TOKEN}
+        const headers = {headers:{'X-Auth-Token': process.env.FOOTBALL_API_TOKEN}}
         const rodadasBr = await axios.get('https://api.football-data.org/v4/competitions/BSA/matches', headers)
         const tabelaBr = await axios.get('https://api.football-data.org/v4/competitions/BSA/standings',headers)
         const tabela = await gerarTabela(tabelaBr.data)
