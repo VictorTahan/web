@@ -1,9 +1,5 @@
-const fs = require('fs/promises')
-
-async function gerarTabela(){
-    const data = await fs.readFile('classificacaoBr.json','utf8')
-    const objeto = JSON.parse(data)
-    const classificacao = objeto.standings
+async function gerarTabela(data){
+    const classificacao = data.standings
     let cardsHtml = ''
     let bgcolor = ""
     classificacao.forEach(element => {

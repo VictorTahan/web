@@ -165,7 +165,7 @@ span{
 
   #rodadas, #tabela {
     font-size: 14px;
-    overflow-x: auto; /* permite rolagem horizontal se precisar */
+    overflow-x: auto; 
   }
 
 

@@ -1,11 +1,11 @@
 const express = require('express')
-const {requerirJson,criarArquivoJson} = require('./requisicao')
 const app = express()
-const fs = require('fs/promises')
 const path = require('path')
 const gerarTabela = require('./ranking')
-const {gerarRodadas,renderRodada} = require('./rodadas')
+const {gerarNumeroRodada,renderRodada} = require('./rodadas')
 const handlebars = require('express-handlebars')
+const axios = require('axios')
+require('dotenv').config()
 
 //configurações
     //Template Engine
@@ -17,12 +17,11 @@ const handlebars = require('express-handlebars')
 
 app.get('/',async(req,res) => {
     try{
-        const classBr = requerirJson('https://api.football-data.org/v4/competitions/BSA/standings')
-        const rodadasBr = requerirJson('https://api.football-data.org/v4/competitions/BSA/matches')
-        await criarArquivoJson(classBr,'classificacaoBr.json')
-        await criarArquivoJson(rodadasBr,'rodadasBr.json')
-        const tabela = await gerarTabela()
-        const rodada = await gerarRodadas()
+        const headers = { 'X-Auth-Token': process.env.FOOTBALL_API_TOKEN}
+        const rodadasBr = await axios.get('https://api.football-data.org/v4/competitions/BSA/matches', headers)
+        const tabelaBr = await axios.get('https://api.football-data.org/v4/competitions/BSA/standings',headers)
+        const tabela = await gerarTabela(tabelaBr.data)
+        const rodada = await gerarNumeroRodada(rodadasBr.data)
         const rodadas = renderRodada(rodada)
         res.render('index', {
         tabelaHTML: tabela,
