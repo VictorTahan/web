@@ -35,7 +35,7 @@ async function gerarNumeroRodada(data) {
     const naoFinalizadosSaoEspeciais = rodada
     .filter(j => j.sta !== 'FINISHED')
     .every(j => statusEspeciais.includes(j.sta))
-    if (finalizados < 10 || naoFinalizadosSaoEspeciais) {
+    if (finalizados < 10 && !naoFinalizadosSaoEspeciais) {
       rodadas_naoIniciadas.push(rodada);
     }
   });
