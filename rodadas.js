@@ -31,7 +31,11 @@ async function gerarNumeroRodada(data) {
 
   rodadas.forEach((rodada) => {
     const finalizados = rodada.filter(j => j.sta === 'FINISHED').length;
-    if (finalizados < 9) {
+    const statusEspeciais = ['SUSPENDED', 'POSTPONED', 'CANCELLED', 'AWARDED']
+    const naoFinalizadosSaoEspeciais = rodada
+    .filter(j => j.sta !== 'FINISHED')
+    .every(j => statusEspeciais.includes(j.sta))
+    if (finalizados < 10 && naoFinalizadosSaoEspeciais) {
       rodadas_naoIniciadas.push(rodada);
     }
   });
