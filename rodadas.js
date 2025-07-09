@@ -74,7 +74,6 @@ function renderRodada(n) {
         <div id="placar_vis">${golsVis}</div>
         <div id="visitante">${jogo.visitante.abreviacao}</div>
         <div id="img_vis"><img src="${jogo.visitante.imagem}" style="width: 45px;height: 45px;"></div>
-        <div id="status_partida">${jogo.sta}</div>
       </div>
     `
   })
